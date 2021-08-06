@@ -10,30 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_212126) do
+ActiveRecord::Schema.define(version: 2021_08_04_211049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "contributions", force: :cascade do |t| #DONE
+  create_table "contributions", force: :cascade do |t|
     t.string "word_input"
     t.string "audio_address"
     t.string "character_input"
     t.string "image_address"
     t.string "definition"
     t.string "pronunciation"
-    t.boolean "verification_status"
+    t.boolean "verification_status", default: false
     t.text "sentence_example"
-    t.integer "votes"
+    t.integer "votes", default: 0
     t.integer "directory_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "directories", force: :cascade do |t| #DONE
+  create_table "directories", force: :cascade do |t|
     t.datetime "last_updated"
-    t.integer "views"
+    t.integer "views", default: 0
     t.string "language_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_212126) do
   create_table "experts", force: :cascade do |t|
     t.string "education"
     t.text "linguistic_experience"
-    t.boolean "verficiation_status", default: false
+    t.boolean "verficiation_status"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -55,10 +55,13 @@ ActiveRecord::Schema.define(version: 2021_08_03_212126) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t| #DONE
+  create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.datetime "date_of_birth"
+    t.string "username"
+    t.string "password_digest"
+    t.text "bio"
+    t.string "date_of_birth"
     t.string "nationality"
     t.string "education_status"
     t.string "country_of_residence"
