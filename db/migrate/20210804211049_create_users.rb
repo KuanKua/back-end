@@ -9,7 +9,15 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :date_of_birth
       t.string :nationality
       t.string :education_status
-      t.string :country_of_residence
+      t.string :address
+      t.string :email
+      t.string :phone_number
+      t.string :organization
+      t.string :website
+      t.string :github
+      t.string :instagram
+      t.string :twitter
+      t.string :facebook
 
       t.timestamps
     end

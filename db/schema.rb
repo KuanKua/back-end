@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(version: 2021_08_04_211049) do
     t.datetime "last_updated"
     t.integer "views", default: 0
     t.string "language_name"
+    t.string "language_description"
+    t.text "database_description"
+    t.string "directory_name"
+    t.string "primarily_spoken_at"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -64,7 +69,15 @@ ActiveRecord::Schema.define(version: 2021_08_04_211049) do
     t.string "date_of_birth"
     t.string "nationality"
     t.string "education_status"
-    t.string "country_of_residence"
+    t.string "address"
+    t.string "email"
+    t.string "phone_number"
+    t.string "organization"
+    t.string "website"
+    t.string "github"
+    t.string "instagram"
+    t.string "twitter"
+    t.string "facebook"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
