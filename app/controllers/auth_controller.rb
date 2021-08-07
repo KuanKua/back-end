@@ -1,6 +1,6 @@
 class AuthController < ApplicationController
   def register
-    register_params = params.permit(:first_name, :last_name, :username, :password, :bio, :date_of_birth, :nationality, :education_status, :country_of_residence)
+    register_params = params.permit(:first_name, :last_name, :username, :password, :bio, :date_of_birth, :nationality, :education_status, :address, :email, :phone_number, :organization, :website, :github, :instagram, :facebook, :twitter)
     user = User.create(register_params)
 
     if user.valid?
