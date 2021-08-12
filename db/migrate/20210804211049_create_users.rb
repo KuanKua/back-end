@@ -18,6 +18,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :instagram
       t.string :twitter
       t.string :facebook
+      t.string :avatar_address
 
       t.timestamps
     end

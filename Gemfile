@@ -43,3 +43,4 @@ gem 'faker'
 
 gem 'active_model_serializers'
 gem "jwt", "~> 2.2"
+gem 'color-generator'

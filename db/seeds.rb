@@ -12,10 +12,10 @@ Directory.destroy_all
 
 
 puts "Creating users..."
-daniel = User.create(first_name: "Daniel", last_name: "Mekuriaw", username: "daniel", password: "123", bio: "I am Dani.", date_of_birth: Faker::Date.between(from: '2001-07-16', to: '2001-07-16'), nationality: "Ethiopian", education_status: "Undergraduate Student", address: "United States of America", email: "daniel.mekuriaw16@gmail.com", phone_number: "617-866-7928", organization: "Yale University", website: "www.danielmekuriaw.com", github: "www.github.com/danielmekuriaw", instagram:"danielmekuriaw", twitter: "danielmekuriaw", facebook: "Daniel Mekuriaw")
+daniel = User.create(first_name: "Daniel", last_name: "Mekuriaw", username: "daniel", password: "123", bio: "I am Dani.", date_of_birth: Faker::Date.between(from: '2001-07-16', to: '2001-07-16'), nationality: "Ethiopian", education_status: "Undergraduate Student", address: "United States of America", email: "daniel.mekuriaw16@gmail.com", phone_number: "617-866-7928", organization: "Yale University", website: "www.danielmekuriaw.com", github: "www.github.com/danielmekuriaw", instagram:"danielmekuriaw", twitter: "danielmekuriaw", facebook: "Daniel Mekuriaw", avatar_address: "https://source.boringavatars.com/marble/120/Maria%20Mitchell?colors=264653,2a9d8f,e9c46a,f4a261,e76f51")
 
 30.times{
-    User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: Faker::Name.first_name, password: "123", bio: Faker::Quote.famous_last_words, date_of_birth: Faker::Date.between(from: '1980-12-23', to: '2003-12-25'), nationality: Faker::Address.country, education_status: "Graduate Student", address: Faker::Address.country, email: Faker::Internet.email, phone_number: Faker::PhoneNumber.cell_phone, organization: Faker::Company.name, website: Faker::Internet.url, github: "www.github.com/#{Faker::Internet.username}", instagram: Faker::Internet.username, twitter: Faker::Internet.username, facebook: Faker::Internet.username)
+    daniel.followers << User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: Faker::Name.first_name, password: "123", bio: Faker::Quote.famous_last_words, date_of_birth: Faker::Date.between(from: '1980-12-23', to: '2003-12-25'), nationality: Faker::Address.country, education_status: "Graduate Student", address: Faker::Address.country, email: Faker::Internet.email, phone_number: Faker::PhoneNumber.cell_phone, organization: Faker::Company.name, website: Faker::Internet.url, github: "www.github.com/#{Faker::Internet.username}", instagram: Faker::Internet.username, twitter: Faker::Internet.username, facebook: Faker::Internet.username, avatar_address: "https://source.boringavatars.com/marble/120/Maria%20Mitchell?colors=262653,2a918f,e0c46a,f4a251,ea6f51")
 }
 
 puts "Created users!"
@@ -46,23 +46,23 @@ sentences_array = [ "ብቻዬን ነው የምጓዘው።", "ብቻዬን አ�
 ]
 
 puts "Creating directory..."
-amharic_words_directory = Directory.create(last_updated: DateTime.now(), views: 0, language_name: "Amharic", language_description: "Amharic is a language that is widely spoken in Ethiopia.", database_description: "This is a directory to have digital records of the Amharic words.", directory_name: "Amharic Words", primarily_spoken_at: "Ethiopia")
+amharic_words_directory = Directory.create!(views: 0, language_name: "Amharic", language_description: "Amharic is a language that is widely spoken in Ethiopia.", database_description: "This is a directory to have digital records of the Amharic words.", directory_name: "Amharic Words", primarily_spoken_at: "Ethiopia", directory_type: "Word", user_id: daniel.id, goal: 100)
 amharic_words_directory.user = daniel
 amharic_words_directory.save
-amharic_sentences_directory = Directory.create(last_updated: DateTime.now(), views: 0, language_name: "Amharic", language_description: "Amharic is a language that is widely spoken in Ethiopia.", database_description: "This is a directory to have digital records of the Amharic sentences.", directory_name: "Amharic Sentences", primarily_spoken_at: "Ethiopia")
+amharic_sentences_directory = Directory.create!(views: 0, language_name: "Amharic", language_description: "Amharic is a language that is widely spoken in Ethiopia.", database_description: "This is a directory to have digital records of the Amharic sentences.", directory_name: "Amharic Sentences", primarily_spoken_at: "Ethiopia", directory_type: "Sentence", user_id: daniel.id, goal: 10)
 amharic_sentences_directory.user = daniel
 amharic_sentences_directory.save
 puts "Successfully created a directory!"
 
 
-words_array.each{
-    |word|
-    contr = Contribution.create(word_input: word, definition: Faker::Quote.famous_last_words, sentence_example: Faker::Quote.famous_last_words)
-    contr.user = User.all[rand(User.all.size)]
-    contr.directory = amharic_words_directory
-    amharic_words_directory.save
-    contr.save
-}
+# words_array.each{
+#     |word|
+#     contr = Contribution.create(word_input: word, definition: Faker::Quote.famous_last_words, sentence_example: Faker::Quote.famous_last_words)
+#     contr.user = User.all[rand(User.all.size)]
+#     contr.directory = amharic_words_directory
+#     amharic_words_directory.save
+#     contr.save
+# }
 
 # Contribution.all.each{
 #     |contribution|
@@ -75,19 +75,19 @@ words_array.each{
 #     puts "------------------------------------"
 # }
 
-sentences_array.each{
-    |sentence|
-    contr = Contribution.create(sentence_example: sentence)
-    contr.user = User.all[rand(User.all.size)]
-    contr.directory = amharic_sentences_directory
-    amharic_sentences_directory.save
-    contr.save
-}
+# sentences_array.each{
+#     |sentence|
+#     contr = Contribution.create(sentence_example: sentence)
+#     contr.user = User.all[rand(User.all.size)]
+#     contr.directory = amharic_sentences_directory
+#     amharic_sentences_directory.save
+#     contr.save
+# }
 
-puts "Successfully seeded contributions!"
+# puts "Successfully seeded contributions!"
 
-puts "Creating expert..."
-expert = Expert.create(education: "Linguistic Studies", linguistic_experience: "Student")
-expert.user = daniel
-puts "Successfully seeded expert!"
+# puts "Creating expert..."
+# expert = Expert.create(education: "Linguistic Studies", linguistic_experience: "Student")
+# expert.user = daniel
+# puts "Successfully seeded expert!"
 

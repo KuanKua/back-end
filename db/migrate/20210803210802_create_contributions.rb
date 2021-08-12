@@ -10,6 +10,8 @@ class CreateContributions < ActiveRecord::Migration[6.1]
       t.boolean :verification_status, default: false
       t.text :sentence_example, default: nil
       t.integer :votes, default: 0
+      t.string :word_input_english_translation, default: nil
+      t.string :sentence_example_english_translation, default: nil
       t.integer :directory_id
       t.integer :user_id
 
