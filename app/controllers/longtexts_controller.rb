@@ -33,6 +33,19 @@ class LongtextsController < ApplicationController
         render json: new_longtext
     end
 
+    def votes
+        longtext = Longtext.find_by(id: params[:longtext_id])
+
+        votes = longtext.user_votes.count
+
+        render json: {votes: votes}
+    end
+
+    def approve
+        user_vote = UserVote.create(user_id: params[:user_id], longtext_id: params[:longtext_id], value: "Approved")
+        user_vote.save
+    end
+
     private
 
     def longtext_params

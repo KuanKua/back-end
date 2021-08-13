@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get "/directories/recentfive", to: "directories#recentfive"
   post "/users/:id/regenerate", to: "users#regenerate"
-  
+
   resources :user_votes
   resources :directories
   resources :contributions
@@ -55,7 +55,10 @@ Rails.application.routes.draw do
 
   get "/users/:id/directories", to: "users#directories"
 
-  
+  post "/characters/:character_id/approve/:user_id", to: "characters#approve"
+  post "/phrases/:phrase_id/approve/:user_id", to: "phrases#approve"
+  post "/sentences/:sentence_id/approve/:user_id", to: "sentences#approve"
+  post "/longtexts/:longtext_id/approve/:user_id", to: "longtexts#approve"
 
 
 end

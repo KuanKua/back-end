@@ -29,8 +29,8 @@ class UsersController < ApplicationController
       user2 = User.find_by(id: params["id2"])
       user2.followers << user1
       activity = Activity.create(activity_log: "@#{user1.username} started following @#{user2.username}.")
-      user1.activities << activity
-      user2.activities << activity
+      user1.activities << Activity.create(activity_log: "@#{user1.username} started following @#{user2.username}.")
+      user2.activities << Activity.create(activity_log: "@#{user1.username} started following @#{user2.username}.")
       user2.save
     end
 
@@ -39,8 +39,8 @@ class UsersController < ApplicationController
       user2 = User.find_by(id: params["id2"])
       user2.followers.delete(user1)
       activity = Activity.create(activity_log: "@#{user1.username} stopped following @#{user2.username}.")
-      user1.activities << activity
-      user2.activities << activity
+      user1.activities << Activity.create(activity_log: "@#{user1.username} stopped following @#{user2.username}.")
+      user2.activities << Activity.create(activity_log: "@#{user1.username} stopped following @#{user2.username}.")
       user2.save
     end
 
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
          |follower| 
          my_activities = my_activities + follower.activities
       }
-      render json: my_activities.uniq
+      render json: my_activities
     end
 
     def update

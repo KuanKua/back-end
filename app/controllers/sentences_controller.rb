@@ -33,6 +33,19 @@ class SentencesController < ApplicationController
         render json: new_sentence
     end
 
+    def votes
+        sentence = Sentence.find_by(id: params[:sentence_id])
+
+        votes = sentence.user_votes.count
+
+        render json: {votes: votes}
+    end
+
+    def approve
+        user_vote = UserVote.create(user_id: params[:user_id], sentence_id: params[:sentence_id], value: "Approved")
+        user_vote.save
+    end
+
     private
 
     def sentence_params

@@ -36,24 +36,9 @@ class WordsController < ApplicationController
     def votes
         word = Word.find_by(id: params[:word_id])
 
-        votes = word.user_votes.select{
-            |wuv| wuv.value == "Approved"
-        }.count
+        votes = word.user_votes.count
 
-        array = []
-
-        array = word.user_votes.select{
-            |uv| 
-            uv[:user_id].to_i == params[:user_id].to_i
-        }
-
-        last_value = "Disapproved"
-
-        if array.length > 0 
-            last_value = array.first[:value]
-        end
-
-        render json: {votes: votes, last_value: last_value}
+        render json: {votes: votes}
     end
 
     def approve

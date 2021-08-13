@@ -32,6 +32,19 @@ class CharactersController < ApplicationController
         render json: new_character
     end
 
+    def votes
+        character = Character.find_by(id: params[:character_id])
+
+        votes = character.user_votes.count
+
+        render json: {votes: votes}
+    end
+
+    def approve
+        user_vote = UserVote.create(user_id: params[:user_id], character_id: params[:character_id], value: "Approved")
+        user_vote.save
+    end
+
     private
 
     def character_params
