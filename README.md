@@ -1,24 +1,3 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This is the repository for the backend code for KuanKua. This backend code is written with Ruby on Rails (5.1.7 version), and it provides a RESTful API for the frontend. It is currently hosted on Heroku [https://kuankua-api.herokuapp.com/directories].
